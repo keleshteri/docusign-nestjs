@@ -32,6 +32,9 @@
     "url": "https://github.com/keleshteri/docusign-nestjs.git"
   },
   "bugs": "https://github.com/keleshteri/docusign-nestjs/issues",
+  "peerDependencies": {
+    "@nestjs/common": "^10.3.8"
+  },
   "dependencies": {
     "@nestjs/common": "^10.3.8",
     "reflect-metadata": "^0.2.2",

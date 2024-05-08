@@ -19,7 +19,12 @@
         "strictNullChecks": false,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "emitDecoratorMetadata": true
+        "noUnusedLocals": false,
+        "noLib": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowJs": false,
+        "skipLibCheck": false,
     },
     "exclude": [
         "node_modules",
