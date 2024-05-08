@@ -1,0 +1,45 @@
+{
+  "name": "@keleshteri/docusign-nestjs",
+  "version": "1.0.0",
+  "description": "docusign nestjs",
+  "author": {
+    "name": "MMSK Keleshteri",
+    "email": "web.developer.keleshteri@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "MMSK Keleshteri",
+      "email": "web.developer.keleshteri@gmail.com"
+    }
+  ],
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*",
+    "*.md"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keleshteri/docusign-nestjs.git"
+  },
+  "bugs": "https://github.com/keleshteri/docusign-nestjs/issues",
+  "dependencies": {
+    "@nestjs/common": "^10.3.8",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.11",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.5"
+  }
+}
