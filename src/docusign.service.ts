@@ -10,6 +10,7 @@ export class DocusignService {
   constructor(@Inject('DOCUSIGN_CONFIG') private config: DocusignConfig) {
     this.apiClient = new docusign.ApiClient();
     this.apiClient.setOAuthBasePath(this.config.oAuthBasePath);
+    console.log("DocusignService constructor called");
     console.log(this.config);
   }
 }

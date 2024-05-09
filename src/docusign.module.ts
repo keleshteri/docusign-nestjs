@@ -6,15 +6,8 @@ import {
   DocusignModuleOptionsFactory,
 } from './config/docusign.config';
 
-@Module({
-  // providers: [DocusignService],
-  // exports: [DocusignService],
-})
-export class DocusignModule implements OnModuleInit {
-  onModuleInit() {
-    console.log(`The module has been initialized.`);
-  }
-
+@Module({})
+export class DocusignModule {
   //static forRoot
   static forRoot(options: DocusignConfig): DynamicModule {
     const providers: Provider[] = [
