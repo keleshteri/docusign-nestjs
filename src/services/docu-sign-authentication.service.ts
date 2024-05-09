@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import * as docusign from 'docusign-esign';
-import { DocuSignConfig } from '../config/docusign.config';
-
+import { DocusignModuleOptions } from '../interfaces/docusign-options.interface';
+ 
 @Injectable()
 export class DocuSignAuthenticationService {
   private apiClient: docusign.ApiClient;
 
-  constructor(private config: DocuSignConfig) {
+  constructor(@Inject('DOCUSIGN_CONFIG') private config: DocusignModuleOptions) {
     this.apiClient = new docusign.ApiClient();
     this.apiClient.setOAuthBasePath(this.config.oAuthBasePath);
   }
