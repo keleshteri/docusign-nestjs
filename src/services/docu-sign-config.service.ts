@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { DocusignModuleOptions } from '../interfaces/docusign-options.interface';
 /**
  * Service to provide configuration for DocuSign
@@ -9,10 +9,10 @@ export class DocuSignConfigService {
 
   /**
    *  Constructor
-   * @param initialConfig
+   * @param  {DocusignModuleOptions} config
    */
-  constructor(initialConfig: DocusignModuleOptions) {
-    this.config = initialConfig;
+  constructor(@Inject('DOCUSIGN_CONFIG') config: DocusignModuleOptions) {
+    this.config =  config;
   }
 
   updateConfig(newConfig: Partial<DocusignModuleOptions>) {
