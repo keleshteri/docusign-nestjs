@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import * as docusign from "docusign-esign";
-import { DocuSignConfig } from './config/docusign.config';
+import { DocuSignConfig } from '../config/docusign.config';
 // import docusign from 'docusign-esign';
  
 @Injectable()

@@ -1,32 +1,28 @@
-import { Type } from "@nestjs/common";
-
-
-//DO WE NEED TO ADD DocuSignConfig OR NEED USE ON METHOD
-  //Tokens
-  // accessToken: string;
-  // refreshToken: string;
-  // expiresIn: number;
-  // tokenType: string;
-  // //Authentication scopes
+/**
+ * DocuSign Configuration
+ */
 export interface DocuSignConfig {
-  baseUrl: string;
-  accountId: string;
-  integrationKey: string;
-  //rsaPrivateKey or secretKey
-  rsaPrivateKey: string;
+  //basePath defaults https://www.docusign.net/restapi - every API call's (relative) path
+  basePath: string;
+  //oAuthBasePath - every authentication API call's (relative) path.
   oAuthBasePath: string;
+  //accountId
+  accountId: string;
+  // integrationKey or Client Id
+  integrationKey: string;
+  //Client secret
+  clientSecret: string;
+  //RSA Private Key -
+  rsaPrivateKey: string;
+  //Redirect/Callback URI
+  redirectUri: string;
+  // userId
   userId: string;
-}
-
-
-//OptionsFactory
-export interface DocusignModuleOptionsFactory {
-  createDocusignModuleOptions(): Promise<DocuSignConfig> | DocuSignConfig;
-}
-//AsyncOptions
-export interface DocusignModuleAsyncOptions {
-  useClass?: Type<DocusignModuleOptionsFactory>;
-  useExisting?: Type<DocusignModuleOptionsFactory>;
-  useFactory?: (...args: any[]) => DocuSignConfig | Promise<DocuSignConfig>;
-  inject?: any[];
+  //Authentication scopes
+  scopes: string[];
+  //Tokens
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+  tokenType: string;
 }
