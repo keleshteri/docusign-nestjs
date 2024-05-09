@@ -51,7 +51,7 @@ export class DocuSignAuthenticationService {
     this.apiClient.addDefaultHeader('Authorization', 'Bearer ' + accessToken);
     console.log('Account ID:', this.config.accountId);
     this.apiClient.setBasePath(this.config.basePath);
-    const userInfo = await this.apiClient.getUserInfo();
+    const userInfo = await this.apiClient.getUserInfo(accessToken);
     console.log('UserInfo:', userInfo);
     return userInfo;
   }
