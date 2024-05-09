@@ -49,6 +49,7 @@ export class DocusignModule {
         },
         DocusignService,
         DocuSignAuthenticationService,
+        DocuSignConfigService,
       ];
     } else if (options.useFactory) {
       return [
@@ -59,6 +60,7 @@ export class DocusignModule {
         },
         DocusignService,
         DocuSignAuthenticationService,
+        DocuSignConfigService,
       ];
     }
     throw new Error('Invalid DocusignModuleAsyncOptions');
