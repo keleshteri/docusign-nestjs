@@ -1,9 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import * as docusign from 'docusign-esign';
 import { DocusignModuleOptions } from '../interfaces/docusign-options.interface';
- 
+
 @Injectable()
 export class DocuSignAuthenticationService {
+  private readonly logger = new Logger(DocuSignAuthenticationService.name);
   private apiClient: docusign.ApiClient;
 
   constructor(@Inject('DOCUSIGN_CONFIG') private config: DocusignModuleOptions) {
@@ -11,10 +12,47 @@ export class DocuSignAuthenticationService {
     this.apiClient.setOAuthBasePath(this.config.oAuthBasePath);
   }
   /**
-   *
+   *  Get Authorization URI
+   * @returns
+   */
+  async getAuthorizationUri(): Promise<string> {
+    const authUri = this.apiClient.getAuthorizationUri(
+      this.config.integrationKey,
+      this.config.scopes || ['signature'],
+      this.config.redirectUri,
+      'code',
+    );
+    return authUri;
+  }
+
+  /**
+   * Get Access Token by Code
+   * @param code
+   * @returns
+   */
+  async getAccessTokenByCode(code: string): Promise<string> {
+    this.logger.log('Getting access token by code...');
+    this.apiClient.setBasePath(this.config.basePath);
+    try {
+      // Get the access token
+      const results = await this.apiClient.generateAccessToken(
+        this.config.integrationKey,
+        this.config.clientSecret,
+        code,
+      );
+      return results.body.access_token;
+    } catch (error) {
+      console.error('Failed to get access token:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get Access Token by JWT User
    * @returns
    */
   async getAccessTokenByJWTUser(): Promise<string> {
+    this.logger.log('Getting access token by JWT User...');
     // Set the base path for the OAuth
     this.apiClient.setBasePath(this.config.basePath);
     try {
@@ -46,13 +84,11 @@ export class DocuSignAuthenticationService {
    * @returns
    */
   async authenticate(): Promise<docusign.UserInfo> {
+    this.logger.log('Authenticating...');
     const accessToken = await this.getAccessTokenByJWTUser();
-    console.log('Access Token:', accessToken);
     this.apiClient.addDefaultHeader('Authorization', 'Bearer ' + accessToken);
-    console.log('Account ID:', this.config.accountId);
     this.apiClient.setBasePath(this.config.basePath);
     const userInfo = await this.apiClient.getUserInfo(accessToken);
-    console.log('UserInfo:', userInfo);
     return userInfo;
   }
 }

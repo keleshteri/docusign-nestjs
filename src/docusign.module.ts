@@ -1,5 +1,4 @@
 import { DynamicModule, Module, OnModuleInit, Provider } from '@nestjs/common';
-import { DocusignService } from './services/docusign.service';
 import { DocuSignAuthenticationService } from './services/docu-sign-authentication.service';
 import {
   DocusignModuleAsyncOptions,
@@ -7,6 +6,8 @@ import {
   DocusignModuleOptionsFactory,
 } from './interfaces/docusign-options.interface';
 import { DocuSignConfigService } from './services/docu-sign-config.service';
+import { DocuSignEnvelopeService } from './services/docu-sign-envelope.service';
+import { DocuSignDocumentService } from './services/docu-sign-document.service';
 
 @Module({})
 export class DocusignModule {
@@ -19,7 +20,8 @@ export class DocusignModule {
       },
       DocuSignConfigService,
       DocuSignAuthenticationService,
-      DocusignService,
+      DocuSignDocumentService,
+      DocuSignEnvelopeService,
     ];
 
     return {
@@ -51,8 +53,9 @@ export class DocusignModule {
           inject: [options.useExisting || options.useClass],
         },
         DocuSignConfigService,
-        DocusignService,
+        DocuSignDocumentService,
         DocuSignAuthenticationService,
+        DocuSignEnvelopeService,
       ];
     } else if (options.useFactory) {
       return [
@@ -62,8 +65,9 @@ export class DocusignModule {
           inject: options.inject || [],
         },
         DocuSignConfigService,
-        DocusignService,
+        DocuSignDocumentService,
         DocuSignAuthenticationService,
+        DocuSignEnvelopeService,
       ];
     }
     throw new Error('Invalid DocusignModuleAsyncOptions');
