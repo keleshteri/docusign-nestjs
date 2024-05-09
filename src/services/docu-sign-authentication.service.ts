@@ -47,7 +47,9 @@ export class DocuSignAuthenticationService {
    */
   async authenticate(): Promise<docusign.UserInfo> {
     const accessToken = await this.getAccessTokenByJWTUser();
+    console.log('Access Token:', accessToken);
     this.apiClient.addDefaultHeader('Authorization', 'Bearer ' + accessToken);
+    console.log('Account ID:', this.config.accountId);
 
     const usersApi = new docusign.UsersApi(this.apiClient);
     return usersApi.get(this.config.accountId);
