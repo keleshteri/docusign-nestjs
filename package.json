@@ -1,6 +1,6 @@
 {
   "name": "@keleshteri/docusign-nestjs",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "docusign nestjs",
   "author": {
     "name": "MMSK Keleshteri",
@@ -20,7 +20,7 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "prepublish": "npm run build",
-    "push": "npm run build && npm --no-git-tag-version version patch  "
+    "push": "npm run build && npm --no-git-tag-version version patch && git add . && git commit -m \"patch version\" && git push && npm publish --access public"
   },
   "keywords": [],
   "license": "MIT",
